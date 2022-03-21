@@ -1,0 +1,39 @@
+{% extends 'user/base.html' %}
+{% load staticfiles %}
+{% block css_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/movie.css' %}">
+{% endblock %}
+
+{% block title_block %}
+    Add Review
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="add_movie_info">
+        <ul>
+        {% if user.is_authenticated %}
+        <h1>Add a Review for this Movie</h1>
+        <hr>
+
+        <form id="movieform" method="post" action="{% url 'movie:addreview' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }} 
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                {{ field.errors }} <br />
+                {{ field.help_text }} <br />
+                {{ field }} <br />
+            {% endfor %} <br />
+            <input  type="submit" name="submit" value="Add Review" />
+        </form>
+        <hr>
+        <a class="link" href="{% url 'movie:allmovies' %}">Return to all movies</a>
+        {% else %}
+        Please log in before adding a review.
+        {% endif %}
+
+    </div>
+
+{% endblock %}

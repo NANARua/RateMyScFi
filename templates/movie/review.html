@@ -1,0 +1,41 @@
+{% extends 'user/base.html' %}
+{% load staticfiles %}
+{% block css_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/movie.css' %}">
+{% endblock %}
+
+{% block title_block %}
+    {% if movie %}
+        {{ movie.title }}
+    {% else %}
+        Unknown movie
+    {% endif %} 
+{% endblock %}
+
+{% block body_block %}
+
+<div class="movie_poster">
+                    
+    <img src="{{ MEDIA_URL }}{{ movie.poster }}" alt="Picture of poster" /><br />
+    <h3>{{ movie.title }}</h3>
+    
+</div>
+
+    <div id="review_header">
+        <div id="header_left"></div>
+        <div id="header_middle">REVIEWS</div>
+        <div id="header_right"></div>
+    </div>
+
+    <div class="review">
+        <div class="review_content">
+            <i>Rating:</i> {{ review.rating }} <br />
+            <i>Review:</i> {{ review.content }} <br />
+        </div>
+    </div>
+    <hr>
+    <a class="link" href="{% url 'movie:addreview' %}">Add Review</a>
+    <a class="link" href="{% url 'movie:allmovies' %}">Return to movie list</a>
+</div>
+
+{% endblock %}

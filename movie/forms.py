@@ -1,6 +1,6 @@
 from mimetypes import init
 from django import forms
-from movie.models import Movie
+from movie.models import Movie, Review
 
 class MovieForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Title of movie")
@@ -14,3 +14,12 @@ class MovieForm(forms.ModelForm):
     class Meta:
         model = Movie
         fields = ('title', 'year', 'director', 'rating', 'description', 'poster', 'slug')
+
+class ReviewForm(forms.ModelForm):
+    rating = forms.FloatField(initial=0, help_text="Movie rating")
+    content = forms.CharField(widget=forms.Textarea, help_text="Add a description ")  
+    
+
+    class Meta:
+        model = Review
+        fields = ('rating', 'content')

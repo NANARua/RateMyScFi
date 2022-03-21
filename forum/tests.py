@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 from forum.models import Post, PostReply
 from user.models import User, UserProfile
-from movie.models import Movie, Review, FavouriteList
+# from movie.models import Movie, Review, FavouriteList
 
 
 # Create your tests here.

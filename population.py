@@ -110,7 +110,7 @@ def populate():
                         'description': 'A bank teller discovers that he\'s actually an NPC inside a brutal, open world video game.',
                         'director': 'Shawn Levy',
                         'year': 2021,
-                        'poster': 'posters/free.jpeg',
+                        'poster': 'posters/free.jpg',
                        'review': BlankReview,
                         'rating': 7.2, },
               }

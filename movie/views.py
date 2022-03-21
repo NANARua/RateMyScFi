@@ -1,13 +1,13 @@
 from turtle import title
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from movie.forms import MovieForm
-from movie.models import Movie
+from django.urls import reverse
+from movie.forms import MovieForm, ReviewForm
+from movie.models import Movie, Review
 from django.conf import settings
-
-
-
-
+from django.views import View
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 
@@ -28,10 +28,18 @@ def singlemovie(request, singlemovie_name_slug):
     response = render(request, 'movie/singlemovie.html', context=context_dict)
     return response
 
+class ReviewView(View):
+    def get(self, request, review_id):
+        context_dict = {}
+        review = Review.objects.get(id=review_id)
+        
+        context_dict['Review'] = review 
+        return render(request, 'movie/singlemovie.html', context=context_dict)
 
 
 
-# @login_required
+
+@login_required
 def add_movie(request):
     form = MovieForm()
 
@@ -50,4 +58,46 @@ def add_movie(request):
             print(form.errors)
 
     return render(request, 'movie/addmovie.html', {'form': form})
+
+
+def add_review(request):
+    form = ReviewForm()
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, request.FILES or None)
+        
+
+        if form.is_valid():
+
+            
+
+            form.save(commit=True)
+            return redirect('/movie/singlemovie')
+        else:
+            print(form.errors)
+
+    return render(request, 'movie/addreview.html', {'form': form})
+
+
+    
+    
+    
+    
+    
+    #@method_decorator(login_required)
+    #def get(self, request):
+     #   user = request.user
+      #  form = ReviewForm()
+       # return render(request, 'movie/addreview.html', {'form': form})
+#
+ #   def post(self, request):
+  #      form = ReviewForm(request.POST)
+   #     if form.is_valid():
+    #        form.instance.author = request.user
+    #        form.save(commit=True)
+     #       
+      #      return redirect(reverse('movies:singlemovie'))
+      #  else:
+       #     print(form.errors)
+        #return render(request, 'movie/addreview.html', {'form': form})
      

@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, redirect, render_to_response
 from django.urls import reverse
 from django.views.generic import TemplateView
-
+from movie.views import movielist
+from django.contrib import messages
 from user.froms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
@@ -95,3 +96,7 @@ class UserProfileView(TemplateView):
 
     def get_context_data(self, **kwargs):
         print(self.request.user)
+
+
+
+

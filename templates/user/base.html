@@ -35,8 +35,9 @@
                         <li><a href="{% url 'user:register' %}">SignUp</a></li>
                         <li><a href="{% url 'user:login' %}" >Login</a></li>
                     {% endif %}
-
+                    
                     </ul>
+                    
                 </div>
 
                 <div id="menu">                 
@@ -44,7 +45,6 @@
                     <button class="button" type="button" onclick="location.href= '{% url 'movie:allmovies' %}'">MOVIES</button>
                     <button class="button" type="button" onclick="location.href= '{% url 'forum:forum' %}'">FORUM</button>
                     <button class="button" type="button" onclick="location.href= '{% url 'about' %}'">ABOUT</button>
-                    
                 </div>
             </div>
         </div>

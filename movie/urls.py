@@ -9,4 +9,6 @@ urlpatterns = [
     path('allmovies', views.movielist, name='allmovies'),
     path('addmovie', views.add_movie, name='addmovie'),
     path('singlemovie/<slug:singlemovie_name_slug>/', views.singlemovie, name='singlemovie'),
+    path('addreview', views.add_review, name='addreview'),
+    path('<int:movie_id>/', views.ReviewView.as_view(), name='review'),
 ] 
